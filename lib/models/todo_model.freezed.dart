@@ -14,18 +14,13 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#custom-getters-and-methods');
 
-TodoModel _$TodoModelFromJson(Map<String, dynamic> json) {
-  return _TodoModel.fromJson(json);
-}
-
 /// @nodoc
 mixin _$TodoModel {
   String get content => throw _privateConstructorUsedError;
   ImportantType get type => throw _privateConstructorUsedError;
-  bool get isSelect => throw _privateConstructorUsedError;
+  bool get isDone => throw _privateConstructorUsedError;
   bool get isDeleted => throw _privateConstructorUsedError;
 
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   $TodoModelCopyWith<TodoModel> get copyWith =>
       throw _privateConstructorUsedError;
@@ -36,8 +31,7 @@ abstract class $TodoModelCopyWith<$Res> {
   factory $TodoModelCopyWith(TodoModel value, $Res Function(TodoModel) then) =
       _$TodoModelCopyWithImpl<$Res, TodoModel>;
   @useResult
-  $Res call(
-      {String content, ImportantType type, bool isSelect, bool isDeleted});
+  $Res call({String content, ImportantType type, bool isDone, bool isDeleted});
 }
 
 /// @nodoc
@@ -55,7 +49,7 @@ class _$TodoModelCopyWithImpl<$Res, $Val extends TodoModel>
   $Res call({
     Object? content = null,
     Object? type = null,
-    Object? isSelect = null,
+    Object? isDone = null,
     Object? isDeleted = null,
   }) {
     return _then(_value.copyWith(
@@ -67,9 +61,9 @@ class _$TodoModelCopyWithImpl<$Res, $Val extends TodoModel>
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
               as ImportantType,
-      isSelect: null == isSelect
-          ? _value.isSelect
-          : isSelect // ignore: cast_nullable_to_non_nullable
+      isDone: null == isDone
+          ? _value.isDone
+          : isDone // ignore: cast_nullable_to_non_nullable
               as bool,
       isDeleted: null == isDeleted
           ? _value.isDeleted
@@ -87,8 +81,7 @@ abstract class _$$TodoModelImplCopyWith<$Res>
       __$$TodoModelImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {String content, ImportantType type, bool isSelect, bool isDeleted});
+  $Res call({String content, ImportantType type, bool isDone, bool isDeleted});
 }
 
 /// @nodoc
@@ -104,7 +97,7 @@ class __$$TodoModelImplCopyWithImpl<$Res>
   $Res call({
     Object? content = null,
     Object? type = null,
-    Object? isSelect = null,
+    Object? isDone = null,
     Object? isDeleted = null,
   }) {
     return _then(_$TodoModelImpl(
@@ -116,9 +109,9 @@ class __$$TodoModelImplCopyWithImpl<$Res>
           ? _value.type
           : type // ignore: cast_nullable_to_non_nullable
               as ImportantType,
-      isSelect: null == isSelect
-          ? _value.isSelect
-          : isSelect // ignore: cast_nullable_to_non_nullable
+      isDone: null == isDone
+          ? _value.isDone
+          : isDone // ignore: cast_nullable_to_non_nullable
               as bool,
       isDeleted: null == isDeleted
           ? _value.isDeleted
@@ -129,16 +122,13 @@ class __$$TodoModelImplCopyWithImpl<$Res>
 }
 
 /// @nodoc
-@JsonSerializable()
+
 class _$TodoModelImpl implements _TodoModel {
   const _$TodoModelImpl(
       {this.content = '',
       this.type = ImportantType.none,
-      this.isSelect = false,
+      this.isDone = false,
       this.isDeleted = false});
-
-  factory _$TodoModelImpl.fromJson(Map<String, dynamic> json) =>
-      _$$TodoModelImplFromJson(json);
 
   @override
   @JsonKey()
@@ -148,14 +138,14 @@ class _$TodoModelImpl implements _TodoModel {
   final ImportantType type;
   @override
   @JsonKey()
-  final bool isSelect;
+  final bool isDone;
   @override
   @JsonKey()
   final bool isDeleted;
 
   @override
   String toString() {
-    return 'TodoModel(content: $content, type: $type, isSelect: $isSelect, isDeleted: $isDeleted)';
+    return 'TodoModel(content: $content, type: $type, isDone: $isDone, isDeleted: $isDeleted)';
   }
 
   @override
@@ -165,47 +155,35 @@ class _$TodoModelImpl implements _TodoModel {
             other is _$TodoModelImpl &&
             (identical(other.content, content) || other.content == content) &&
             (identical(other.type, type) || other.type == type) &&
-            (identical(other.isSelect, isSelect) ||
-                other.isSelect == isSelect) &&
+            (identical(other.isDone, isDone) || other.isDone == isDone) &&
             (identical(other.isDeleted, isDeleted) ||
                 other.isDeleted == isDeleted));
   }
 
-  @JsonKey(ignore: true)
   @override
   int get hashCode =>
-      Object.hash(runtimeType, content, type, isSelect, isDeleted);
+      Object.hash(runtimeType, content, type, isDone, isDeleted);
 
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
   _$$TodoModelImplCopyWith<_$TodoModelImpl> get copyWith =>
       __$$TodoModelImplCopyWithImpl<_$TodoModelImpl>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$TodoModelImplToJson(
-      this,
-    );
-  }
 }
 
 abstract class _TodoModel implements TodoModel {
   const factory _TodoModel(
       {final String content,
       final ImportantType type,
-      final bool isSelect,
+      final bool isDone,
       final bool isDeleted}) = _$TodoModelImpl;
-
-  factory _TodoModel.fromJson(Map<String, dynamic> json) =
-      _$TodoModelImpl.fromJson;
 
   @override
   String get content;
   @override
   ImportantType get type;
   @override
-  bool get isSelect;
+  bool get isDone;
   @override
   bool get isDeleted;
   @override

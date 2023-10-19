@@ -46,9 +46,9 @@ class TodoAddModal extends HookWidget {
                 ),
                 const Spacer(),
                 IconButton(
+                  enableFeedback: canSave.value,
                   onPressed: () {
                     if (!canSave.value) {
-                      context.pop();
                       return;
                     }
 
@@ -81,36 +81,17 @@ class TodoAddModal extends HookWidget {
             ),
             SegmentedButton(
               showSelectedIcon: false,
-              segments: const [
-                ButtonSegment<ImportantType>(
-                  value: ImportantType.none,
-                  label: Text(
-                    'None',
-                    style: TextStyle(fontSize: 12),
-                  ),
-                ),
-                ButtonSegment<ImportantType>(
-                  value: ImportantType.low,
-                  label: Text(
-                    'Low',
-                    style: TextStyle(fontSize: 12),
-                  ),
-                ),
-                ButtonSegment<ImportantType>(
-                  value: ImportantType.meddium,
-                  label: Text(
-                    'Meddium',
-                    style: TextStyle(fontSize: 12),
-                  ),
-                ),
-                ButtonSegment<ImportantType>(
-                  value: ImportantType.hight,
-                  label: Text(
-                    'Hight',
-                    style: TextStyle(fontSize: 12),
-                  ),
-                )
-              ],
+              segments: ImportantType.values
+                  .map(
+                    (t) => ButtonSegment<ImportantType>(
+                      value: ImportantType.none,
+                      label: Text(
+                        t.name,
+                        style: const TextStyle(fontSize: 12),
+                      ),
+                    ),
+                  )
+                  .toList(),
               selected: {importentType.value},
               onSelectionChanged: (value) {
                 importentType.value = value.first;

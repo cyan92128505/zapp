@@ -4,12 +4,12 @@ import 'package:zapp/models/todo_model.dart';
 
 class TodoTerm extends StatelessWidget {
   final TodoModel todoModel;
-  final ValueChanged<bool?> onSelect;
+  final VoidCallback onClick;
   final VoidCallback onDelete;
   const TodoTerm({
     super.key,
     required this.todoModel,
-    required this.onSelect,
+    required this.onClick,
     required this.onDelete,
   });
 
@@ -48,12 +48,18 @@ class TodoTerm extends StatelessWidget {
 
       // The child of the Slidable is what the user sees when the
       // component is not dragged.
-      child: RadioListTile(
-        value: todoModel.isSelect,
-        onChanged: onSelect,
-        groupValue: true,
+      child: ListTile(
+        onTap: onClick,
         title: Row(
           children: [
+            Radio(
+              value: todoModel.isDone,
+              onChanged: (value) {
+                onClick();
+              },
+              groupValue: true,
+              toggleable: true,
+            ),
             Expanded(
               child: Text(
                 todoModel.content,

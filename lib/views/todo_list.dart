@@ -21,11 +21,12 @@ class TodoList extends HookWidget {
                 index,
                 TodoTerm(
                   todoModel: todoModel,
-                  onSelect: (value) {
+                  onClick: () {
                     final list = todoList.value;
                     todoList.value = [];
+                    final origin = list[index];
                     final result =
-                        list.removeAt(index).copyWith(isSelect: value == false);
+                        list.removeAt(index).copyWith(isDone: !origin.isDone);
                     list.insert(index, result);
                     todoList.value = list;
                   },
