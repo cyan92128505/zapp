@@ -4,13 +4,13 @@ import 'package:zapp/models/todo_model.dart';
 
 class TodoTerm extends StatelessWidget {
   final TodoModel todoModel;
-  final VoidCallback onClick;
-  final VoidCallback onDelete;
+  final VoidCallback onToggle;
+  final VoidCallback onRemove;
   const TodoTerm({
     super.key,
     required this.todoModel,
-    required this.onClick,
-    required this.onDelete,
+    required this.onToggle,
+    required this.onRemove,
   });
 
   String getSymbol(ImportantType type) {
@@ -37,7 +37,7 @@ class TodoTerm extends StatelessWidget {
         children: [
           SlidableAction(
             onPressed: (context) {
-              onDelete();
+              onRemove();
             },
             backgroundColor: Colors.red,
             foregroundColor: Colors.white,
@@ -49,13 +49,13 @@ class TodoTerm extends StatelessWidget {
       // The child of the Slidable is what the user sees when the
       // component is not dragged.
       child: ListTile(
-        onTap: onClick,
+        onTap: onToggle,
         title: Row(
           children: [
             Radio(
-              value: todoModel.isDone,
+              value: todoModel.completed,
               onChanged: (value) {
-                onClick();
+                onToggle();
               },
               groupValue: true,
               toggleable: true,
@@ -64,14 +64,14 @@ class TodoTerm extends StatelessWidget {
               child: Text(
                 todoModel.content,
                 style: TextStyle(
-                  decoration: todoModel.isDeleted
+                  decoration: todoModel.deleted
                       ? TextDecoration.lineThrough
                       : TextDecoration.none,
                 ),
               ),
             ),
             Text(
-              getSymbol(todoModel.type),
+              getSymbol(ImportantType.getType(todoModel.type)),
               style: const TextStyle(
                 color: Colors.red,
               ),

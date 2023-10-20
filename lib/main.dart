@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:go_router/go_router.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:zapp/views/todo_list.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(
+    const ProviderScope(
+      child: TodoApp(),
+    ),
+  );
 }
 
 final _parentKey = GlobalKey<NavigatorState>();
@@ -18,8 +23,8 @@ final routerConfig =
   ),
 ]);
 
-class MyApp extends HookWidget {
-  const MyApp({super.key});
+class TodoApp extends HookWidget {
+  const TodoApp({super.key});
 
   @override
   Widget build(BuildContext context) {

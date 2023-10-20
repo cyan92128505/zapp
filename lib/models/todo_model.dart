@@ -1,6 +1,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'todo_model.freezed.dart';
+part 'todo_model.g.dart';
 
 enum ImportantType {
   none,
@@ -29,9 +30,13 @@ enum ImportantType {
 @freezed
 class TodoModel with _$TodoModel {
   const factory TodoModel({
+    @Default('') String id,
     @Default('') String content,
-    @Default(ImportantType.none) ImportantType type,
-    @Default(false) bool isDone,
-    @Default(false) bool isDeleted,
+    @Default('None') String type,
+    @Default(false) bool completed,
+    @Default(false) bool deleted,
   }) = _TodoModel;
+
+  factory TodoModel.fromJson(Map<String, dynamic> json) =>
+      _$TodoModelFromJson(json);
 }

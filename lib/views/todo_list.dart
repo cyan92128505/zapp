@@ -1,42 +1,33 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:zapp/components/todo_add_modal.dart';
 import 'package:zapp/components/todo_term.dart';
-import 'package:zapp/models/todo_model.dart';
+import 'package:zapp/providers/todo_provider.dart';
 
-class TodoList extends HookWidget {
+class TodoList extends HookConsumerWidget {
   const TodoList({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    final todoList = useState(<TodoModel>[]);
+  Widget build(BuildContext context, WidgetRef ref) {
+    final todoList = ref.watch(todoListProvider);
 
     return Scaffold(
       appBar: AppBar(title: const Text('Todo List')),
       body: ListView(
-        children: todoList.value
+        children: todoList
             .asMap()
             .map(
               (index, todoModel) => MapEntry(
                 index,
                 TodoTerm(
                   todoModel: todoModel,
-                  onClick: () {
-                    final list = todoList.value;
-                    todoList.value = [];
-                    final origin = list[index];
-                    final result =
-                        list.removeAt(index).copyWith(isDone: !origin.isDone);
-                    list.insert(index, result);
-                    todoList.value = list;
+                  onToggle: () {
+                    ref.read(todoListProvider.notifier).toggle(todoModel.id);
                   },
-                  onDelete: () {
-                    final list = todoList.value;
-                    todoList.value = [];
-                    final result =
-                        list.removeAt(index).copyWith(isDeleted: true);
-                    list.insert(index, result);
-                    todoList.value = list;
+                  onRemove: () {
+                    ref
+                        .read(todoListProvider.notifier)
+                        .removeTodo(todoModel.id);
                   },
                 ),
               ),
@@ -46,12 +37,9 @@ class TodoList extends HookWidget {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
-          final list = todoList.value;
           final todo = await TodoAddModal.open(context: context);
           if (todo != null) {
-            list.add(todo);
-            todoList.value = [];
-            todoList.value = list;
+            ref.read(todoListProvider.notifier).addTodo(todo);
           }
         },
         tooltip: 'Add Todo',

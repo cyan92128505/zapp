@@ -54,7 +54,7 @@ class TodoAddModal extends HookWidget {
 
                     context.pop(TodoModel(
                       content: textController.text,
-                      type: importentType.value,
+                      type: importentType.value.name,
                     ));
                   },
                   icon: Icon(
@@ -65,6 +65,7 @@ class TodoAddModal extends HookWidget {
               ],
             ),
             TextField(
+              key: const Key('ContentTextField'),
               decoration: const InputDecoration(label: Text('Content')),
               controller: textController,
               onChanged: (value) {
@@ -84,7 +85,7 @@ class TodoAddModal extends HookWidget {
               segments: ImportantType.values
                   .map(
                     (t) => ButtonSegment<ImportantType>(
-                      value: ImportantType.none,
+                      value: t,
                       label: Text(
                         t.name,
                         style: const TextStyle(fontSize: 12),
