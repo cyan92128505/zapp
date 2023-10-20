@@ -1,4 +1,4 @@
-package com.example.zapp
+package com.aoma.zapp
 
 import io.flutter.embedding.android.FlutterActivity
 

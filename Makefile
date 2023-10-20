@@ -23,13 +23,10 @@ build-apk:
 	@fvm flutter build apk
 
 build-model:
-	@fvm flutter pub run build_runner build --delete-conflicting-outputs
+	@fvm dart run build_runner build --delete-conflicting-outputs
 
 test:
 	@fvm flutter test
 
 watch:
 	@dart pub run build_runner watch
-
-update-build-number:
-	@sh ./update_build_number.sh
